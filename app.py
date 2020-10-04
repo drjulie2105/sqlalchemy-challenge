@@ -39,7 +39,7 @@ def home():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
-        f"/api/v1.0/prescipitation<br/>"
+        f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
         f"/api/v1.0/&lt;start&gt;<br/>"
@@ -78,7 +78,7 @@ def stations():
     # Query all stations
     results = session.query(Station.station, Station.name).all()
 
-    station_list=[]
+    station_list={}
 
     for station, name in results:
         station[station]=name
