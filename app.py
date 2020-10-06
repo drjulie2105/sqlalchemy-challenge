@@ -119,7 +119,7 @@ def tobs():
 
 
 @app.route("/api/v1.0/<start>")
-def temp_range_start(start):
+def temp_start(start):
 
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -146,7 +146,7 @@ def temp_range_start(start):
     return jsonify(return_list)
 
 @app.route("/api/v1.0/<start>/<end>")
-def temp_range_start_end(start,end):
+def temp_start_end(start,end):
  
     # Create our session (link) from Python to the DB
     session = Session(engine)
@@ -157,7 +157,7 @@ def temp_range_start_end(start,end):
                 func.min(Measurement.tobs), \
                 func.avg(Measurement.tobs), \
                 func.max(Measurement.tobs)).\
-                filter(and_(Measurement.date >= start, Measurement.date <= end)).\
+                filter(Measurement.date >= start, Measurement.date <= end).\
                 group_by(Measurement.date).all()
 
     for date, min, avg, max in results:
